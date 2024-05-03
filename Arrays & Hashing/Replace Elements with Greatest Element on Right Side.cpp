@@ -31,8 +31,8 @@
 
 // Constraints:
 // ============
-// 1 <= arr.length <= 104
-// 1 <= arr[i] <= 105
+// 1 <= arr.length <= 10^4
+// 1 <= arr[i] <= 10^5
 
 
 
