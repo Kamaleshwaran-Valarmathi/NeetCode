@@ -1,4 +1,4 @@
-// Reference: https://leetcode.com/problems/is-subsequence/description/
+// Reference: https://leetcode.com/problems/is-subsequence/
 
 
 
