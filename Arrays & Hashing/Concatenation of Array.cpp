@@ -1,4 +1,4 @@
-// Reference: https://leetcode.com/problems/concatenation-of-array/description/
+// Reference: https://leetcode.com/problems/concatenation-of-array/
 
 
 
