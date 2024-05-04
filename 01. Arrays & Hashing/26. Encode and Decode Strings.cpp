@@ -82,6 +82,7 @@ public:
         return n;
     }
 
+    // Encodes a list of strings to a single string.
     string encode(vector<string>& strs) {
         string res = "";
         for (string str: strs) {
@@ -91,6 +92,7 @@ public:
         return res;
     }
 
+    // Decodes a single string to a list of strings.
     vector<string> decode(string s) {
         vector<string> res;
         for (int i = 0, n; i < s.size(); i += n) {
