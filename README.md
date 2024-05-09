@@ -1,3 +1,3 @@
 # NeetCode
 
-- https://neetcode.io/practice
+[https://neetcode.io/practice]{:target="_blank"} 
