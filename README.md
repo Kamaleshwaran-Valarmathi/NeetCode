@@ -1,3 +1,3 @@
 # NeetCode
 
-<a href="https://neetcode.io/practice" target="_blank">NeetCode</a>
+NeetCode Practice Problems: https://neetcode.io/practice
