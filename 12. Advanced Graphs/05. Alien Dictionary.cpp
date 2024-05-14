@@ -64,6 +64,7 @@
 class Solution {
 public:
     string alienOrder(vector<string>& A) {
+        // Graph Construction
         unordered_map<char, unordered_set<char>> adjLs;
         for (string word: A)
             for (char ch: word)
@@ -78,6 +79,7 @@ public:
             }
         }
 
+        // Topological Sort
         vector<int> indegree(26, 0);
         for (auto [key, value]: adjLs)
             for (char ch: value)
