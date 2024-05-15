@@ -36,7 +36,7 @@ class Solution {
 public:
     string multiply(string num1, string num2) {
         int n = num1.size(), m = num2.size();
-        vector<int> digits(n+m, 0);
+        vector<int> digits(n + m, 0);
         for (int i = n - 1; i >= 0; --i) {
             for (int j = m - 1; j >= 0; --j) {
                 int pos1 = i + j, pos2 = i + j + 1;
