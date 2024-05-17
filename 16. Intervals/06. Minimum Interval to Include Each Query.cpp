@@ -51,14 +51,14 @@
 class Solution {
 public:
     vector<int> minInterval(vector<vector<int>>& intervals, vector<int>& queries) {
-        vector<pair<int, int>> q;
+        vector<pair<int, int>> q; // {query, index}
         for (int i = 0; i < queries.size(); ++i)
             q.push_back({queries[i], i});
         
         sort(intervals.begin(), intervals.end());
         sort(q.begin(), q.end());
 
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> minHeap;
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> minHeap; // {size, end}
         vector<int> res(queries.size());
         for (int qIdx = 0, intIdx = 0; qIdx < q.size(); ++qIdx) {
             while (intIdx < intervals.size() && intervals[intIdx][0] <= q[qIdx].first) {
