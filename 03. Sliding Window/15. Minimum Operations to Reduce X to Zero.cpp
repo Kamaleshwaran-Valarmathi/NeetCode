@@ -41,6 +41,31 @@
 
 
 
+// Approach 1
+
+class Solution {
+public:
+    int minOperations(vector<int>& nums, int x) {
+        int n = nums.size(), res = INT_MAX, sum = 0;
+        for (int left = 0, right = 0; right < (n << 1); ++right) {
+            sum += nums[right % n];
+            while (sum >= x) {
+                if (sum == x && (right - left + 1) <= n && (left == 0 || right == (n << 1) - 1 || (left < n && right > n)))
+                    res = min(res, right - left + 1);
+                sum -= nums[left % n];
+                ++left;
+            }
+        }
+        return (res == INT_MAX) ? -1 : res;
+    }
+};
+
+
+
+
+
+// Approach 2
+
 class Solution {
 public:
     int minOperations(vector<int>& nums, int x) {
