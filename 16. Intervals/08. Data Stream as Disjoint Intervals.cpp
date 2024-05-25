@@ -96,6 +96,17 @@ public:
     set<pair<int, int>> ranges;
 
     SummaryRanges() {}
+
+    void merge(auto& prev, auto& cur) {
+        if (cur->first - prev->second == 1) {
+            auto [prevStart, prevEnd] = *prev;
+            auto [curStart, curEnd] = *cur;
+            ranges.insert({prevStart, curEnd});
+            ranges.erase(prev);
+            ranges.erase(cur);
+            cur = ranges.find({prevStart, curEnd});
+        }
+    }
     
     void addNum(int value) {
         if (visited.find(value) != visited.end())
@@ -104,25 +115,14 @@ public:
         ranges.insert({value, value});
         visited.insert(value);
 
-        auto prevItr = ranges.end(), curItr = ranges.end(), nextItr = ranges.end();
-        curItr = ranges.find({value, value});
-        if (curItr != ranges.begin())   prevItr = --(ranges.find({value, value}));
-        if (curItr != ranges.end())     nextItr = ++(ranges.find({value, value}));
-
-        if (prevItr == ranges.end() || curItr->first - prevItr->second > 1)
-            prevItr = curItr, curItr = nextItr;
-
-        while (curItr != ranges.end() && curItr->first - prevItr->second == 1) {
-            auto [prevStart, prevEnd] = *prevItr;
-            auto [curStart, curEnd] = *curItr;
-            ranges.insert({prevStart, curEnd});
-
-            ranges.erase(prevItr);
-            ranges.erase(curItr);
-
-            prevItr = ranges.find({prevStart, curEnd});
-            if (prevItr != ranges.end())
-                curItr = ++(ranges.find({prevStart, curEnd}));
+        auto curItr = ranges.find({value, value});
+        if (curItr != ranges.begin()) {
+            auto prevItr = --(ranges.find({value, value}));
+            merge(prevItr, curItr);
+        }
+        if (curItr != ranges.end()) {
+            auto nextItr = ++(ranges.find({curItr->first, curItr->second}));
+            merge(curItr, nextItr);
         }
     }
     
