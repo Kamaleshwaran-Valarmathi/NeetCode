@@ -53,6 +53,8 @@
 
 
 
+// Approach 1
+
 class SummaryRanges {
 public:
     set<int> nums;
@@ -78,6 +80,56 @@ public:
             }
         }
         res.push_back({start, end});
+        return res;
+    }
+};
+
+
+
+
+
+// Approach 2
+
+class SummaryRanges {
+public:
+    unordered_set<int> visited;
+    set<pair<int, int>> ranges;
+
+    SummaryRanges() {}
+    
+    void addNum(int value) {
+        if (visited.find(value) != visited.end())
+            return;
+        
+        ranges.insert({value, value});
+        visited.insert(value);
+
+        auto prevItr = ranges.end(), curItr = ranges.end(), nextItr = ranges.end();
+        curItr = ranges.find({value, value});
+        if (curItr != ranges.begin())   prevItr = --(ranges.find({value, value}));
+        if (curItr != ranges.end())     nextItr = ++(ranges.find({value, value}));
+
+        if (prevItr == ranges.end() || curItr->first - prevItr->second > 1)
+            prevItr = curItr, curItr = nextItr;
+
+        while (curItr != ranges.end() && curItr->first - prevItr->second == 1) {
+            auto [prevStart, prevEnd] = *prevItr;
+            auto [curStart, curEnd] = *curItr;
+            ranges.insert({prevStart, curEnd});
+
+            ranges.erase(prevItr);
+            ranges.erase(curItr);
+
+            prevItr = ranges.find({prevStart, curEnd});
+            if (prevItr != ranges.end())
+                curItr = ++(ranges.find({prevStart, curEnd}));
+        }
+    }
+    
+    vector<vector<int>> getIntervals() {
+        vector<vector<int>> res;
+        for (auto [start, end]: ranges)
+            res.push_back({start, end});
         return res;
     }
 };
