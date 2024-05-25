@@ -117,7 +117,7 @@ public:
 
         auto curItr = ranges.find({value, value});
         if (curItr != ranges.begin()) {
-            auto prevItr = --(ranges.find({value, value}));
+            auto prevItr = --(ranges.find({curItr->first, curItr->second}));
             merge(prevItr, curItr);
         }
         if (curItr != ranges.end()) {
